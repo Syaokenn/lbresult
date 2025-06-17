@@ -91,7 +91,7 @@
         <label>Liver Stress Index:<input type="number" id="lsIndex"></label>
         <label>Neuro Stress Index:<input type="number" id="nsIndex"></label>
         <label>Uric Acid:<input type="number" id="uAcid"></label>
-        <label>Blood Group:
+        <label><input type="checkbox" id="checkboxbg">Blood Group:
             <select id="bloodgroup">
             <option value="A">A</option>
             <option value="B">B</option>
@@ -200,9 +200,11 @@
 
       pdfContent.innerHTML = html;
 
+
+      alert(visfatType + " " + bodyfatType + " " + bloodsugarLv);
       if (visfatType > 4)
         document.getElementById("visfatAdv").innerHTML = labels.visfatAdv;
-      if(!!patient.bodyfat){
+      if(!!record.bodyfat){
         if (bodyfatType > 4) 
           document.getElementById("bodyfatAdv").innerHTML = labels.bodyfatAdv2;
         if (bodyfatType == 1)
@@ -267,12 +269,12 @@
           bodyfatType = 2 + Math.floor((record.bodyfat - 21) / 3);
       }
       if (bodyfatType < 1) bodyfatType = 1;
-      if (bodyfatType > 9) bodyfatType = 0;
+      if (bodyfatType > 9) bodyfatType = 10;
 
       //VISCERAL FAT
       if (record.visfat > 9) {
       visfatType = 2 + Math.floor((record.visfat - 9) / 2);
-      if (visfatType > 9) visfatType = 0
+      if (visfatType > 9) visfatType = 10
       }
 
       //BLOOD SUGAR
@@ -282,7 +284,7 @@
         }else {
           bloodsugarLv = Math.floor(2 + (record.bloodsugar-4.4)/0.6);
           if(bloodsugarLv > 9) {
-            bloodsugarLv = 0;
+            bloodsugarLv = 10;
           }
         }
       } else if (bloodsugarType == 1){
@@ -291,7 +293,7 @@
         }else {
           bloodsugarLv = Math.floor(2 + (record.bloodsugar-6.7)/0.6);
           if(bloodsugarLv > 9) {
-            bloodsugarLv = 0;
+            bloodsugarLv = 10;
           }
         }
       } else if (bloodsugarType == 2){
@@ -300,7 +302,7 @@
         }else {
           bloodsugarLv = Math.floor(2 + (record.bloodsugar-5.0)/0.6);
           if(bloodsugarLv > 9) {
-            bloodsugarLv = 0;
+            bloodsugarLv = 10;
           }
         }
       } else{
@@ -309,7 +311,7 @@
         }else {
           bloodsugarLv = Math.floor(2 + (record.bloodsugar-4.4)/0.6);
           if(bloodsugarLv > 9) {
-            bloodsugarLv = 0;
+            bloodsugarLv = 10;
           }
         }
       }
@@ -380,7 +382,7 @@
       prHtml += `<div class="row1">
           <div class="column1">${labels.bloodsugar}<br>
           <img src="meter-1${bloodsugarLv}.png" width="200"></div>
-          <div class="column2">${record.bloodsugar} mmol/L ()<br><span id="bloodsugarAdv"></span></div>
+          <div class="column2">${record.bloodsugar} mmol/L <br><span id="bloodsugarAdv"></span></div>
         </div>`
       }
     if (!(!record.bloodpressure1 && !record.bloodpressure2)){
@@ -478,10 +480,19 @@
         }
       });
 
+      if (document.getElementById("checkboxbg").checked) {
+        lbrHtml += `
+            <div class="row1">
+            <div class="column1">${labels.bGroup}
+              </div>
+              <div class="column2">${document.getElementById("bloodgroup").selectedOptions[0].value}</div>
+            </div>`;
+          }
+
       record.addlbResult(lbResult);
       lbResult = [];
       return lbrHtml;
-  }
+      }
 
   document.getElementById("generatepdf").onclick = function(){
   const element = document.getElementById("pdfContent");
@@ -521,7 +532,7 @@
       link.href = URL.createObjectURL(blob);
       link.download = fileName;
       link.click();
-      localStorage.removeItem("csvData");
+      //localStorage.removeItem("csvData");
 }
   
   </script>
