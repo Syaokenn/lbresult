@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Assessment Form</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf-font@1.0.7/cn-font.js"></script>
+    <script src="font.js"></script>
+</head>
+<body>
+    <h1>Health Assessment Form</h1>
+    <form id="healthForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required><br><br>
+
+        <label for="weight">Weight (kg):</label>
+        <input type="number" id="age" name="age" required><br><br>
+
+        <label for="language">Language:</label>
+        <select id="language" name="language" required>
+            <option value="en">English</option>
+            <option value="zh">中文</option>
+        </select><br><br>
+
+        <h3>Urine Test Results:</h3>
+
+        <label for="pH">pH value:</label>
+        <input type="number" id="pH" name="pH" required><br><br>
+
+        <label for="Glucose">Glucose:</label>
+        <input type="number" id="glucose" name="glucose" required><br><br>
+
+        <label for="Protein">Protein:</label>
+        <input type="number" id="protein" name="protein" required><br><br>
+
+        <label for="Ketones">Ketones:</label>
+        <input type="number" id="ketones" name="ketones" required><br><br>
+
+        <button type="button" onclick="generatePDFReport()">Submit</button>
+    </form>
+
+    <script>
+        async function generatePDFReport() {
+            const { jsPDF } = window.jspdf;
+
+
+            //data
+            const name = document.getElementById('name').value;
+            const age = document.getElementById('age').value;
+            const language = document.getElementById('language').value;
+            const pH = document.getElementById('pH').value;
+            const glucose = parseFloat(document.getElementById('glucose').value);
+            const protein = parseFloat(document.getElementById('protein').value);
+            const ketones = document.getElementById('ketones').value;
+
+            //image
+            const imageUrl = 'picture16.png';
+            const response = await fetch(imageUrl);
+            const blob = await response.blob();
+            const reader = new FileReader();
+
+            let summary = language === 'zh' ? "尿液评估总结\n" : "Urea Assessment Summary\n";
+            let reasons = "";
+            let suggestions = "";
+
+            if (pH < 4.6) {
+                summary += (language === 'zh' ? `\n尿pH值偏低：${pH}` : `\nLow pH value: ${pH}`);
+                reasons += (language === 'zh' ? "可能是高蛋白饮食、酸中毒。\n" : "May due to high-protein diet, acidosis .\n");
+                suggestions += (language === 'zh' ? "建议：饮食调整，减少高蛋白食物，必要时治疗感染或纠正酸碱平衡。\n" : "Suggestion: Dietary modification, reduction of high-protein foods, treatment of infection or correction of acid-base balance if necessary.\n");
+            }
+
+            if (pH > 8) {
+                summary += (language === 'zh' ? `\n尿pH值偏高：${pH}` : `\nHigh pH value: ${pH}`);
+                reasons += (language === 'zh' ? "可能是泌尿系感染，精液。\n" : "May cause by Urinary tract infection, semen.\n");
+                suggestions += (language === 'zh' ? "饮食调整，减少高蛋白食物，必要时治疗感染或纠正酸碱平衡。\n" : "Dietary modification, reduction of high-protein foods, treatment of infection or correction of acid-base balance if necessary.\n");
+            }
+
+
+            if (glucose >0) {
+                summary += (language === 'zh' ? `\n尿糖值异常：${glucose} mg/dL` : `\nAbnormal urine glucose level: ${glucose} mg/dL`);
+                reasons += (language === 'zh' ? "可能是糖尿病、肾小管病。\n" : "May cause diabetes and renal tubular disease.\n");
+                suggestions += (language === 'zh' ? "控制血糖，调整饮食和运动。\n" : "Control blood sugar, adjust diet and exercise.\n");
+            }
+
+            if ( protein > 0) {
+                summary += (language === 'zh' ? `\n尿蛋白异常：${protein} mg/dL` : `\nAbnormal urine protein level: ${protein} mg/dL`);
+                reasons += (language === 'zh' ? "可能是肾病、肾炎、高血压。\n" : "May cause by kidney disease, nephritis, and hypertension.\n");
+                suggestions += (language === 'zh' ? "控制血压，减盐饮食，减压，改善肾功能。\n" : "Control blood pressure, reduce salt in diet, reduce stress, and improve kidney function.\n");
+            }
+
+//            const [systolic, diastolic] = bloodPressure.split('/').map(Number);
+            if (ketones > 0) {
+                summary += (language === 'zh' ? `\n尿酮症：${ketones} mmHg` : `\nAbnormal urine ketones: ${ketones} mmHg`);
+                reasons += (language === 'zh' ? "可能是糖尿病酮症酸中毒、禁食。\n" : "May due to diabetic ketoacidosis, fasting.\n");
+                suggestions += (language === 'zh' ? "增加碳水化合物摄入，避免长时间禁食或过度运动。\n" : "Increase carbohydrate intake and avoid prolonged fasting or excessive exercise.\n");
+            }
+
+            const docContent = `${summary}\n\n${language === 'zh' ? "原因：\n" : "Reasons:\n"}${reasons}\n${language === 'zh' ? "建议：\n" : "Suggestions:\n"}${suggestions}`;
+
+            const doc = new jsPDF();
+            if (language === 'zh') {
+                doc.addFileToVFS('SimSun.ttf', base64Font);
+                doc.addFont('SimSun.ttf', 'SimSun', 'normal');
+                doc.setFont('SimSun');
+
+            }
+            doc.setFontSize(12);
+            const lines = doc.splitTextToSize(docContent, 180);
+            doc.text(lines, 10, 10);
+
+            
+            reader.onload = function () {
+        const imgData = reader.result;
+
+        // 插入图片到 PDF (A4尺寸)
+        doc.addImage(imgData, 'PNG',0,0, 32, 32);
+        
+            const fileName = language === 'zh' ? "健康评估.pdf" : "Health_Assessment.pdf";
+            doc.save(fileName);
+
+        }
+
+        reader.readAsDataURL(blob);
+    }
+    </script>
+</body>
+</html>

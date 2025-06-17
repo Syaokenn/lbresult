@@ -1,0 +1,213 @@
+{
+  "en": {
+    "reportTitle": "Live Blood Test Report",
+    "personalProfile": "Personal Profile",
+    "pr": "Physical Result",
+    "name": "Name",
+    "icno": "IC No",
+    "contactno": "Contact No",
+    "gender": "Gender",
+    "age": "Age",
+    "location": "Location",
+    "weight": "Weight (kg)",
+    "height": "Height (cm)",
+    "bodyfat": "Body Fat",
+    "visfat": "Visceral Fat",
+    "bmi": "BMI (Body Mass Index)",
+    "bloodsugar": "Blood Sugar",
+    "heartrate": "Heart Rate",
+    "bloodpressure": "Blood Pressure (systolic/diastolic)",
+    "restm": "Resting Metabolism",
+    "bodyage": "Body Age",
+    "yrs":"years",
+    "bmiAdv1": "Underweight – Your weight is below the healthy range. Consider increasing your intake of nutritious, calorie-dense foods such as nuts, dairy, lean proteins, and healthy fats. Strength training and regular meals are recommended to support healthy weight gain. <br> Idea Weight: IdealWeight",
+    "bmiAdv2": "Normal – Your weight is within the healthy range. Maintain your current diet and activity level. Continue regular exercise, balanced nutrition, and routine health checks to stay in good shape.",
+    "bmiAdv3": "Overweight – You are slightly above the healthy range. It is advisable to start light physical activity like walking or swimming, and reduce sugar and processed food intake. Gradual and sustainable lifestyle adjustments are key. <br> Idea Weight: IdealWeight",
+    "bmiAdv4": "Obese – Your weight exceeds the healthy range. A structured weight loss plan involving a low-calorie, nutrient-rich diet and increased physical activity is recommended. Regular monitoring and support from a health coach or nutritionist can improve success. <br> Idea Weight: IdealWeight",
+    "bmiAdv5": "Severely Obese – Your weight poses serious health risks. Medical supervision is strongly recommended. A personalized intervention plan, possibly involving medication or clinical programs, may be necessary to manage associated risks such as diabetes, high blood pressure, and heart disease.<br> Idea Weight: IdealWeight",
+    "bodyfatAdv1": "Warning: Body fat too low. May lead to menstrual issues or fatigue.",
+    "bodyfatAdv2": "Warning: High body fat. May increase risk of metabolic syndrome and cardiovascular disease.",
+    "visfatAdv": "High visceral fat. Strongly linked to insulin resistance, fatty liver, and heart disease.",
+    "bloodsugarAdv": "Blood sugar is too high – risk of complications like nerve damage or vision loss. Please monitor and act now.",
+    "bloodpressureAdv": "Blood pressure is too high – risk of stroke or heart disease. Please monitor and manage promptly.",
+    "heartrateAdv": "Abnormal heart rate detected – risk of cardiac issues. Seek medical advice if persistent.",
+    "rmrAdv1":"Consume more calories than $RMR kcal and focus on building muscle with strength training and nutrient-dense foods to support healthy weight gain.",
+    "rmrAdv2":"Maintain your current weight by matching your daily calorie intake, while preserving muscle mass through balanced nutrition and regular exercise.",
+    "rmrAdv3":"Create a modest calorie deficit below $RMR kcal and increase muscle mass to boost metabolism and support sustainable fat loss.",
+    "bodyageAdv": "Your biological age is $status your current age.",
+    "bViscosity": {
+        "label": "Blood Viscosity",
+        "text": "Risks:<br>• Cardiovascular disease – can trigger hypertension and angina<br>• Blood clots – may lead to stroke, heart attack, kidney microvascular blockage, or pulmonary embolism<br>• Cerebrovascular conditions – dizziness, headaches, memory decline, or poor concentration<br><br>Causes:<br>Inadequate water intake, inflammation or chronic diseases (diabetes, hypertension, high cholesterol), smoking, alcohol, stress, poor sleep, lack of exercise"
+    },
+    "bLipid": {
+        "label": "Blood Lipids",
+        "text": "Risks:<br>• High cholesterol<br>• Hypertension<br>• Fatty liver, metabolic syndrome<br>• Overweight, high visceral fat<br><br>Causes:<br>Greasy or sugary diet, overweight, high visceral fat, smoking, alcohol, certain medications"
+    },
+    "bCholesterols": {
+        "label": "Cholesterol",
+        "text": "Risks:<br>• Coronary artery disease / heart attack<br>• Stroke / cerebral infarction<br>• Peripheral vascular disease<br>• Fatty liver, metabolic syndrome<br><br>Causes:<br>Excessive intake of saturated fats, trans fats, and high-cholesterol foods, lack of exercise, diabetes or insulin resistance, genetic hypercholesterolemia"
+    },
+    "bTRisk": {
+        "label": "Blood Clot Risk",
+        "text": "Risks:<br>• Cerebral thrombosis / stroke<br>• Myocardial infarction (sudden cardiac death)<br>• Pulmonary embolism<br><br>Causes:<br>High blood viscosity, vascular damage, slow or stagnant blood flow (prolonged sitting), coagulation disorders (genetic, side effects of certain drugs like contraceptives or COVID vaccines)"
+    },
+    "bParasite": {
+        "label": "Blood Microorganisms",
+        "text": "Risks:<br>• Malnutrition, weakened immunity (frequent illness)<br>• Poor skin/hair health (dryness, hair loss, brittle nails)<br>• Fatigue, especially midday, poor concentration<br>• Hormonal imbalance<br><br>Causes:<br>Unclean air and environment (dusty areas, unwashed bedding or clothes), contaminated food (unwashed, raw, or touched by pets)"
+    },
+    "mEnergy": {
+        "label": "Cardiac Energy",
+        "text": "Risks:<br>• Weak heart pumping and oxygen delivery (shortness of breath)<br>• Brain hypoxia (dizziness, poor memory)<br>• Poor circulation (cold limbs, palpitations, edema)<br><b>Increased risk of heart failure</b><br><br>Causes:<br>Deficiency in nutrients (magnesium, potassium, CoQ10), chronic stress and fatigue, lack of exercise, free radical damage (linked to chronic diseases)"
+    },
+    "bMetabolism": {
+        "label": "Blood Metabolism",
+        "text": "Risks:<br>• Accelerated aging<br>• Chronic inflammation or immune disorders<br>• Vascular problems (increased risk of clots, stroke, heart attack)<br>• Liver and kidney damage<br>• Higher risk of metabolic syndrome<br><br>Causes:<br>Inadequate hydration, poor nutrition, high metabolic burden (waste buildup), sedentary lifestyle, chronic stress and sleep deprivation, chronic illness or medications"
+    },
+    "anaemia": {
+        "label": "Anaemia",
+        "text": "Risks:<br>• Persistent fatigue and weakness (weakened immunity)<br>• Brain hypoxia (dizziness, fainting, poor memory/focus)<br>• Poor circulation (cold/numb hands and feet)<br>• Increased cardiac load (arrhythmia, enlarged heart, heart failure)<br>• Anaemia during pregnancy (poor fetal nutrition, premature birth)<br><br>Causes:<br>Malnutrition (iron, B12, folic acid deficiency), blood loss, chronic illness (kidney disease, cancer, infection), bone marrow dysfunction, hemolytic or hereditary anaemia"
+    },
+    "gToxins": {
+        "label": "Gut Toxins",
+        "text": "Risks:<br>• Digestive issues (bloating, bad breath)<br>• Skin problems (eczema, acne, pigmentation, dullness, oiliness)<br>• Intestinal disease (hemorrhoids, colon polyps, colon cancer risk)<br>• Emotional and immune problems (irritability, fatigue, allergies, illness)<br>• Hormonal/metabolic disorders (irregular menstruation, hormone imbalance)<br><br>Causes:<br>Low fiber intake, inadequate hydration, sedentary habits, delayed or irregular bowel movement, stress, dysbiosis (lack of probiotics), long-term laxative use"
+    },
+    "malnutrition": {
+        "label": "Malnutrition",
+        "text": "Risks:<br>• Weakened immunity (frequent illness)<br>• Poor physical and mental state (low energy, dull skin, hair loss, brittle nails)<br>• Anaemia, sarcopenia, osteoporosis<br>• Hormonal imbalance (irregular periods, reduced male vitality)<br><br>Causes:<br>Unbalanced diet (picky eating, frequent snacks or takeout), extreme dieting (low-calorie, sugar-free, restrictive), poor digestion or absorption (especially in elderly), disease and medication effects (e.g., cancer, kidney disease, long-term meds), erratic lifestyle (binge eating)"
+    },
+    "dDisorder": {
+        "label": "Digestive Disorder",
+        "text": "Risks:<br>• Bloating, stomach pain, acid reflux<br>• Malnutrition<br>• GI diseases (ulcers, higher risk of stomach and colon cancer)<br><br>Causes:<br>Poor diet (greasy, spicy, binge eating, irregular meals), excessive stress, eating too fast, poor chewing, age or chronic illness"
+    },
+    "iResistance": {
+        "label": "Insulin Resistance",
+        "text": "Risks:<br>Type 2 diabetes (insomnia, numbness, amputation, erectile dysfunction)<br>Cardiovascular disease (hypertension, high cholesterol, atherosclerosis)<br>Metabolic syndrome (diabetes, kidney disease, fatty liver)<br>Weight gain, especially abdominal obesity<br><br>Causes:<br>Excess refined sugar and carbs, sedentary lifestyle, obesity (especially visceral fat), stress and poor sleep, genetics, polycystic ovary syndrome (PCOS)"
+    },
+    "rSystem": {
+        "label": "Respiratory Issues",
+        "text": "Risks:<br>Chronic cough, breathing difficulty (reduced lung capacity)<br>Low endurance, shortness of breath<br>Chronic obstructive pulmonary disease (bronchitis, emphysema)<br>Hypoxia and heart-lung failure<br>Respiratory cancers (nasal, throat, trachea, lung)<br><br>Causes:<br>Smoking or secondhand smoke, air pollution, frequent infections (e.g., COVID-related bronchitis), allergies/asthma, genetic or immune issues (narrow airways, sinusitis), GERD"
+    },
+    "rcIndex": {
+        "label": "Renal Stress Index",
+        "text": "Risks:<br>Edema (localized or full-body swelling)<br>Proteinuria, foamy urine<br>Hypertension<br>Metabolic waste buildup (uremia, kidney stones, CKD)<br>Osteoporosis<br>Kidney failure requiring dialysis (end-stage renal disease)<br><br>Causes:<br>Low water intake (poor toxin elimination), high salt/fat diet, excessive protein intake, long-term NSAID use, uncontrolled blood pressure or glucose, urinary retention"
+    },
+    "lsIndex": {
+        "label": "Liver Stress Index",
+        "text": "Risks:<br>Fatigue, poor skin condition, fat accumulation<br>Digestive issues (poor appetite, bloating, constipation)<br>Mood disturbances, low spirits<br>Hormonal imbalance (poor sleep, irregular menstruation)<br>Chronic disease risk (metabolic syndrome, cardiovascular issues)<br>Liver/gallbladder diseases (fatty liver, gallstones, cirrhosis, liver cancer)<br><br>Causes:<br>Poor diet (fried, processed, high-sugar foods, alcohol), overuse of medication (especially painkillers, statins), irregular lifestyle (lack of sleep, no exercise, stress), metabolic burden (high cholesterol, blood sugar, obesity)"
+    },
+    "nsIndex": {
+        "label": "Neural Stress Index",
+        "text": "Risks:<br>Memory decline, poor concentration and response<br>Sleep disorders<br>Peripheral neuropathy (numbness, tingling, cramps)<br>Neurodegenerative diseases (Parkinson's, Alzheimer's, depression)<br><br>Causes:<br>Chronic stress, poor sleep quality, blood sugar problems (diabetic neuropathy), chronic inflammation/autoimmunity, toxins or drug effects (smoking, alcohol, substance abuse)"
+    },
+    "uAcid": {
+        "label": "Uric Acid",
+        "text": "Risks:<br>Gout attacks (uric acid crystals in toes/knees)<br>Higher risk of atherosclerosis, stroke, heart attack<br>Kidney damage or failure<br><br>Causes:<br>Reduced uric acid excretion (impaired kidney/metabolism), overproduction (high-purine foods, alcohol, fructose), obesity (sedentary lifestyle)"
+    },
+    "bGroup":"Blood Group"
+  },
+  "zh": {
+    "reportTitle": "活体血液检测报告",
+    "personalProfile": "个人档案",
+    "pr": "身体检测结果",
+    "name": "姓名",
+    "icno": "身份证号码",
+    "contactno": "联系电话",
+    "gender": "性别",
+    "age": "年龄",
+    "location": "地点",
+    "weight": "体重 (公斤)",
+    "height": "身高 (厘米)",
+    "bodyfat": "体脂",
+    "visfat": "内脏脂肪",
+    "bmi": "身体质量指数",
+    "bloodsugar": "血糖",
+    "heartrate": "心率",
+    "bloodpressure": "血压 (高压/低压)",
+    "restm": "静态代谢",
+    "bodyage": "身体年龄",
+    "yrs":"岁",
+    "bmiAdv1": "体重过轻 – 你的体重低于健康范围。建议增加富含营养和热量的食物摄取，如坚果、乳制品、瘦肉蛋白和健康脂肪。可进行力量训练，并规律进食，以支持健康增重。<br> 理想体重： IdealWeight",
+    "bmiAdv2": "正常 – 你的体重处于健康范围。请继续保持当前的饮食和活动水平。维持规律运动、均衡饮食和定期健康检查，有助于持续健康。",
+    "bmiAdv3": "超重 – 你的体重略高于健康范围。建议开始轻度身体活动，例如散步或游泳，并减少糖分与加工食品的摄入。逐步、可持续的生活方式调整是关键。<br> 理想体重： IdealWeight",
+    "bmiAdv4": "肥胖 – 你的体重已超出健康范围。建议制定结构化的减重计划，包括低热量、富含营养的饮食，并增加身体活动。定期监测体重并寻求营养师或健康教练的支持有助于提升成功率。<br> 理想体重： IdealWeight",
+    "bmiAdv5": "重度肥胖 – 你的体重已对健康构成严重风险。强烈建议在医疗监督下进行控制。可能需要个性化干预计划，包括药物治疗或临床项目，以管理相关风险，例如糖尿病、高血压和心脏病。<br> 理想体重： IdealWeight",
+    "bodyfatAdv1": "警告：体脂过低。可能导致月经失调、疲劳等健康问题。",
+    "bodyfatAdv2": "警告：体脂过高。可能增加代谢综合征和心血管疾病的风险。",
+    "visfatAdv": "内脏脂肪偏高。与胰岛素阻抗、脂肪肝及心脏病高度相关。",
+    "bloodsugarAdv": "血糖过高 —— 可能引发神经损伤、视力下降等并发症，请尽快监测和调整。",
+    "bloodpressureAdv": "血压过高 —— 有中风或心脏病风险，请尽快监控并积极管理。",
+    "heartrateAdv": "心率异常 —— 可能存在心脏问题，若持续异常请及时就医。",
+    "rmrAdv1": "每日摄取热量应高于 $RMR 千卡，搭配阻力训练和高营养密度饮食，以支持健康增重和肌肉增长。",
+    "rmrAdv2": "维持目前体重，确保每日热量摄取接近 $RMR 千卡，并结合均衡饮食和规律运动以维持肌肉质量。",
+    "rmrAdv3": "每日摄取热量应略低于 $RMR 千卡，同时增加肌肉量以提高基础代谢，支持健康减脂。",
+    "bodyageAdv": "您的身体年龄 $status 实际年龄。",
+    "bViscosity": {
+        "label":"血浓稠度",
+        "text":"风险：<br>• 心脏疾病 - 易诱高血压，发心绞痛<br>• 形成血栓 - 严重则导致中風、心肌梗塞，肾脏微血管堵，肺栓塞<br>• 脑血管疾病 - 頭暈、頭痛、记忆力减退或注意力不集中<br><br>原因：<br>水喝太少，炎症或慢性疾病（糖尿病、高血壓、高胆固醇），吸煙、喝酒，壓力大、睡眠差，缺乏運動"
+    },
+    "bLipid":{
+        "label":"血脂",
+        "text":"风险：<br>• 高胆固醇，<br>• 高血壓，<br>• 脂肪肝、代謝症候群<br>• 體重過重、內臟脂肪多<br><br>原因：<br>飲食油膩、高糖，體重過重、內臟脂肪多，抽菸、喝酒，服用药物"
+    },
+    "bCholesterols":{
+        "label":"胆固醇",
+        "text":"风险：<br>• 冠心病/心肌梗塞，<br>• 中风/脑梗塞，<br>• 外周血管疾病，<br>• 脂肪肝、代謝三高<br><br>原因：<br>摄入过多饱和脂肪，反式脂肪和高胆固醇食物，缺乏运动，糖尿病或胰岛素阻抗，家族性高胆固醇"
+    },
+    "bTRisk":{
+        "label":"血栓风险",
+        "text":"风险：<br>• 脑血栓/中风（脑梗塞）<br>• 心肌梗塞(容易猝死)<br>• 肺栓塞<br><br>原因：<br>血液黏稠度高，血管壁受损血流缓慢或不流动（长时间久坐），凝血机制异常（遗传性凝血障碍，某些药物副作用（如避孕药、Covid Vaccine）"
+    },
+    "bParasite":{
+        "label":"血液微生物",
+        "text":"风险：<br>• 营养不良，免疫力下降（容易生病）<br>• 皮膚、頭髮狀況差（乾燥、脫髮、指甲脆弱）<br>• 體力與精神差，易疲勞（尤其中午）、注意力不集中<br>• 荷爾蒙失調<br><br>原因：<br>空气与环境卫生（环境多飞尘，床單或衣物较少换洗），食物（洗不干净，生食，没洗手），食物掉地上宠物"
+    },
+    "mEnergy":{
+        "label":"心肌能量",
+        "text":"风险：<br>• 心臟無力供血，氧氣不足（容易喘）<br>• 腦部供氧不足（頭暈、記憶力差）<br>• 血液循環不順（四肢冰冷，心悸，水腫）<br><b>心臟衰竭風險升高</b><br><br>原因：<br>營養缺乏（缺乏鎂、鉀、Q10），長期壓力與疲勞（心臟負荷變大），缺乏運動，自由基損傷（慢性疾病影響）"
+    },
+    "bMetabolism":{
+        "label":"血液代谢",
+        "text":"风险：<br>• 加速衰老（身体）<br>• 慢性发炎或免疫失调<br>• 血管问题(提高血栓、中风、心梗风险)<br>• 肝脏与肾脏受损<br>• 代谢综合症风险提升<br><br>原因：<br>水分摄取不足，营养不均衡，代谢负担重（代谢废物堆积），缺乏运动，长期压力与熬夜，慢性疾病或药物影响"
+    },
+    "anaemia":{
+        "label":"贫血",
+        "text":"风险：<br>• 持续性疲劳与虚弱（免疫力下降）<br>• 大脑缺氧(头晕，容易晕倒,记忆专注力下降)<br>• 血液循环不良(手脚冰凉麻木）<br>• 心脏负担加重(导致心律不整、心脏扩大、心力衰竭)<br>• 孕妇贫血风险（胎儿营养不足、早产）<br><br>原因：<br>营养不良（缺铁，Vitamin B12，Folic acid)，失血量多，慢性疾病引起（肾病、癌症、感染），骨髓造血功能障碍，溶血性贫血（遗传性贫血）"
+    },
+    "gToxins":{
+        "label":"肠道毒素",
+        "text":"风险：<br>• 消化系统问题（胀气、口臭)<br>• 皮肤湿疹、痘痘、色斑、暗沉、出油<br>• 肠道疾病（痔瘡、大腸息肉、大腸癌風險提高）<br>• 身心与免疫问题（情緒焦躁、容易疲倦，容易过敏反应，生病）<br>• 代谢与内分泌紊乱（月经不调、激素失衡）<br><br>原因：<br>饮食问题（纤维不足、水喝太少)，生活习惯（久坐少动、憋便、不定时排便)，身心压力大(焦虑、生活不规律)，肠道菌相失衡（益生菌不足），长期依赖泻药"
+    },
+    "malnutrition":{
+        "label":"营养不良",
+        "text":"风险：<br>• 免疫力下降（容易生病）<br>• 身体精神状况差（体力弱，无精打采，皮肤暗沉，脱发，指甲断裂）<br>• 貧血，肌少症，骨质疏松<br>• 荷爾蒙失調(經期不規律、男性活力下降)<br><br>原因：<br>饮食不均衡（偏食、挑食、爱吃零食或外食），节食减重过度（长期断糖、低热量、食物单一），消化吸收不良（肠胃功能差、胃口不好、年长者吸收力下降），疾病与药物影响，慢性病、癌症、肾病、长期用药会影响食欲与吸收，生活作息失调（暴饮暴食）"
+    },
+    "dDisorder":{
+        "label":"消化不良",
+        "text":"风险：<br>• 胃胀气、胃痛、胃酸逆流<br>• 营养不良<br>• 肠胃疾病(长期胃痛，胃酸导致胃溃疡，增加胃癌，肠癌风险)<br><br>原因：<br>飲食不當（油膩、辛辣、暴饮暴食、不定時進食)，壓力過大，吃太快、咀嚼不足，年齡或慢性病影響"
+    },
+    "iResistance":{
+        "label":"胰岛素阻抗",
+        "text":"风险：<br>第二型糖尿病（失眠，麻痹痛，截肢，阳痿）<br>心血管疾病（如高血壓、高血脂、動脈硬化）<br>代謝症候群（三高，肾病，脂肪肝）<br>体重难以控制（腹部肥胖）<br><br>原因：<br>摄取过多精致糖和碳水化合物，久坐不动、缺乏运动，肥胖（内脏脂肪过多），压力与睡眠不足，基因因素（家族病史），多囊性卵巢症候群（PCOS）"
+    },
+    "rSystem":{
+        "label":"呼吸器官问题",
+        "text":"风险：<br>慢性咳嗽与呼吸困难(肺活量下降)<br>运动耐力降低、容易气喘<br>慢性阻塞性肺病（支气管炎、肺气肿）<br>缺氧与心肺衰竭<br>支器官癌症（鼻腔癌、喉癌、气管癌、肺癌）<br><br>原因：<br>长期抽烟或二手烟，空气污染或粉尘，反覆呼吸道感染(支气管炎(Covid))，过敏体质或气喘，基因与免疫系统问题 (天生支气管较狭窄，鼻窦炎，哮喘)，慢性胃食道逆流（GERD）"
+    },
+    "rcIndex":{
+        "label":"肾压力指数",
+        "text":"风险：<br>水肿(局部性至全身)<br>尿蛋白、泡泡尿<br>高血压<br>代谢废物累积（尿毒、肾结石、慢性肾病症状）<br>骨质疏松<br>肾衰竭、洗肾（最终可能走向肾功能完全丧失）<br><br>原因：<br>喝水太少（毒素不易排出，增加腎負擔)，高鹽高油飲食，蛋白質攝取過多，長期吃止痛藥或某些藥物，血糖、血壓控制不良，尿急忍太久、不排尿"
+    },
+    "lsIndex":{
+        "label":"肝脏压力指数",
+        "text":"风险：<br>身体状态差（疲劳、皮肤变差，脂肪多）<br>消化不良（食欲差、胀气、便秘）<br>容易烦躁、情绪低落<br>内分泌失调(睡眠品质差、月经不规则）<br>慢性病风险（三高、心血管疾病的风险）<br>肝胆疾病（脂肪肝，胆结石，肝硬化，肝癌）<br><br>原因：<br>饮食习惯（油炸、加工、高糖食物，酒精过量），长期吃太多药（尤其是止痛药、降胆固醇药），生活习惯（熬夜、睡眠不足，缺乏运动，长期压力大），代谢负担（高血脂、高血糖，过胖，体内毒素累积）"
+    },
+    "nsIndex":{
+        "label":"神经压力指数",
+        "text":"风险：<br>记忆力减退、注意力反应力差<br>睡眠障碍<br>周边神经（手脚麻木、刺痛、容易抽筋）<br>精神退化疾病(帕金森、阿兹海默（老人痴呆症）、抑郁症）<br><br>原因：<br>长期压力，睡眠不足或品质差，血糖问题（糖尿病神经病变)，慢性发炎 / 自体免疫，毒素或药物影响（抽烟、喝酒、毒品）"
+    },
+    "uAcid":{
+        "label":"尿酸",
+        "text":"风险：<br>痛风发作(尿酸结晶沉积在脚拇指、膝盖)<br>增加动脉阻塞、中风、心梗风险<br>肾脏损伤、衰竭<br><br>原因：<br>尿酸排泄减少（（肾功能/代谢下降），尿酸产生过多（高嘌呤饮食、饮酒、果糖摄入），肥胖（缺乏运动）"
+    },
+    "bGroup":"血型"}
+}

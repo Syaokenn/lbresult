@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>Live Blood Test Report</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jspdf-font@1.0.7/cn-font.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script src="patient.js"></script>
+    <script src="font.js"></script>
+    <link rel="stylesheet" href="mystyle.css">
+
+  <style>
+    </style>
+</head>
+<body>
+
+    <div class="container">
+     <div class="headerdiv" style="display: flex; justify-content: space-between;">
+	 <img src= "bh-logo.png" 
+	 width="220" 
+                height="60">
+	<div>
+	<h2 style="color: red; margin:0;">Live Blood Test Report</h2>
+	<span id="dateTime"></span>
+  </div>
+  </div>
+
+  <div id="form">
+    <h2>Personal Profile</h2>
+    <label>Name<input id="name" required></label>
+    <label>IC No<input id="icno" type="text" required></label>
+    <label>Contact No<input id="contactno"></label>
+    <label>Gender:
+        <select id="gender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+        </select>
+        </label>
+    <label>Age:<input type="number" id="age"></label>
+    <label>Location:<input id="location"></label>
+    <label>Language:
+        <select id="language">
+            <option value="en">English</option>
+            <option value="zh">中文</option>
+        </select>
+    </label>
+
+    <h2>Physical Test</h2>
+    <label>Weight(kg):<input type="number" id="weight"></label>
+    <label>Height(cm):<input type="number" id="height"></label>
+    <label>Body Fat:<input type="number" id="bodyfat"></label>
+    <label>Visceral Fat:<input type="number" id="visfat"></label>
+    <label>Blood Sugar:
+      <select id="mealtime" style="width: 30%;">
+        <option value="0">Fasting</option>
+        <option value="1">1 hour after meal</option>
+        <option value="2">2 hours after meal</option>
+        <option value="3">3 hours after meal</option>
+      </select>
+      <input type="number" id="bloodsugar" style="width: 30%;">
+    </label>
+    <label>Heart Rate:<input type="number" id="heartrate"></label>
+    <label>Blood Pressure(diastolic/systolic): 
+      <input type="number" id="bloodpressure2" style="width: 10%;" >  /  
+      <input type="number" id="bloodpressure1" style="width: 10%;"></label>
+    <label>Resting Metabolism:<input type="number" id="restm"></label>
+    <label>Body Age:<input type="number" id="bodyage"></label>
+
+    <h2>Live Blood Test</h2>
+    <div id="bloodform">
+      <div>
+        <label>Blood Viscosity:<input type="number" id="bViscosity"></label>
+        <label>Blood Lipid:<input type="number" id="bLipid"></label>
+        <label>Blood Cholesterols:<input type="number" id="bCholesterols"></label>
+        <label>Thrombus Risk:<input type="number" id="bTRisk"></label>
+        <label>Blood Parasite:<input type="number" id="bParasite"></label>
+        <label>Myocardial Energy:<input type="number" id="mEnergy"></label>
+      </div>
+      <div>
+        <label>Body Metabolism:<input type="number" id="bMetabolism"></label>
+        <label>Anaemia:<input type="number" id="anaemia"></label>
+        <label>Gastrointestinal Toxins:<input type="number" id="gToxins"></label>
+        <label>Malnutrition:<input type="number" id="malnutrition"></label>
+        <label>Digestive Disorder:<input type="number" id="dDisorder"></label>
+        <label>Insulin Resistance:<input type="number" id="iResistance"></label>
+      </div>
+      <div>
+        <label>Respiratory System Risk:<input type="number" id="rSystem"></label>
+        <label>Renal Capacity Index:<input type="number" id="rcIndex"></label>
+        <label>Liver Stress Index:<input type="number" id="lsIndex"></label>
+        <label>Neuro Stress Index:<input type="number" id="nsIndex"></label>
+        <label>Uric Acid:<input type="number" id="uAcid"></label>
+        <label>Blood Group:
+            <select id="bloodgroup">
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="AB">AB</option>
+            <option value="O">O</option>
+        </select>
+      </label>
+      </div>
+    </div>
+
+        <button id="generateBtn">Generate Report</button>
+        <button id="generatepdf">Download PDF</button>
+        <button id="generatecsv">Generate CSV</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div id="pdfContent" style="display:block; max-width: 700px;"></div>
+  </div>
+  
+  <script>
+  const datetime = new Date();
+  const patient = new Patient();
+  const record = new Record();
+  let bodyfatType = 0;
+  let visfatType = 1;
+  let bloodsugarLv = 1;
+  let bloodpressureType = 1;
+  let heartrateType = 1;
+  let lbResult = [];
+
+      
+  
+  let langData = {};
+  document.getElementById("dateTime").innerHTML = datetime.toLocaleString();
+  
+  document.getElementById("generateBtn").onclick = function () {
+    const lang = document.getElementById("language").value;
+    
+    fetch('langData.json')
+    .then(response => response.json())
+    .then(data => {
+      langData = data;
+      const labels = langData[lang];
+      if (!labels) return;
+
+      patient.name = document.getElementById("name").value;
+      patient.icno = document.getElementById("icno").value;
+      patient.contactno = document.getElementById("contactno").value;
+      patient.gender = document.getElementById("gender").value;
+      patient.age = document.getElementById("age").value;
+      record.location = document.getElementById("location").value;
+      record.weight = parseFloat(document.getElementById("weight").value);
+      record.height = parseFloat(document.getElementById("height").value);
+      record.bmi = (record.weight / ((record.height / 100) ** 2)).toFixed(1);
+      record.bodyfat = document.getElementById("bodyfat").value;
+      record.visfat = parseInt(document.getElementById("visfat").value);
+      record.bloodsugar = document.getElementById("bloodsugar").value;
+      bloodsugarType = document.getElementById("mealtime").selectedOptions[0].value;
+      record.bloodpressure1 = document.getElementById("bloodpressure1").value;
+      record.bloodpressure2 = document.getElementById("bloodpressure2").value;
+      record.heartrate = document.getElementById("heartrate").value;
+      record.restm = document.getElementById("restm").value;
+      record.bodyage = document.getElementById("bodyage").value;
+      record.mealtime = document.getElementById("mealtime").selectedOptions[0].text;
+     
+      //FOR #PhysicalTest Result
+      let prHtml = getPtResult(labels);
+      
+      //FOR #LiveBloodTest Result
+      let lbrHtml = getlbResult(labels);
+
+      const html = `
+        <div style="display: flex; flex-direction: column;">
+        <div class="headerdiv" style="display: flex; justify-content: space-between;">
+        <img src= "bh-logo.png" width="220" height="60">
+        <div>
+        <h2 style="color: red; margin:0;">Live Blood Test Report</h2>
+        <span>${datetime.toLocaleString()}</span>
+        </div>
+        </div>
+        <table id="profile" style="text-align: center;">
+          <tr>
+            <td><b>${labels.name}</b><br><span>${patient.name}</span></td>
+            <td><b>${labels.icno}</b><br><span>${patient.icno}</span></td>
+            <td><b>${labels.contactno}</b><br><span>${patient.contactno}</span></td>
+          </tr>
+          <tr>
+            <td><b>${labels.gender}</b><br><span id="genderData">${patient.gender}</span></td>
+            <td><b>${labels.age}</b><br><span>${patient.age}</span></td>
+            <td><b>${labels.location}</b><br><span>${patient.location}</span></td>
+          </tr>
+        </table>
+        <h3 id="langPR">Physical Result</h3>
+        <div>
+          ${prHtml}
+        </div>
+
+      <h3>Live Blood Test Result</h3>
+        <div>
+          ${lbrHtml}
+        </div>
+      </div>
+      <div style="height: 200px"> </div> 
+      `;
+
+      pdfContent.innerHTML = html;
+
+      if (visfatType > 4)
+        document.getElementById("visfatAdv").innerHTML = labels.visfatAdv;
+      if(!!patient.bodyfat){
+        if (bodyfatType > 4) 
+        document.getElementById("bodyfatAdv").innerHTML = labels.bodyfatAdv2;
+        if (bodyfatType == 1)
+          document.getElementById("bodyfatAdv").innerHTML = labels.bodyfatAdv1;
+        }
+      if (bloodsugarLv > 4)
+        document.getElementById("bloodsugarAdv").innerHTML = labels.bloodsugarAdv;
+      if (bloodpressureType > 2)
+        document.getElementById("bloodpressureAdv").innerHTML = labels.bloodpressureAdv;
+      if (heartrateType == 3)
+        document.getElementById("heartrateAdv").innerHTML = labels.heartrateAdv;
+ })
+        .catch(err => {
+            console.error("Error", err);
+        });
+
+  }
+
+  function getPtResult(inlabels){
+    
+    let prHtml = "";
+    const labels = inlabels;
+
+    const idealWeight = `${(record.height/100 * record.height/100 * 18.5).toFixed(1)}kg - ${(record.height/100 * record.height/100 * 25).toFixed(1)}kg`;
+      
+      let rmradviceText = labels.rmrAdv1;
+      let bmiType = 1;
+      let rmrLv = 1;
+
+      if (record.bmi < 18.5) 
+      {
+        bmiType = 1;
+        rmrLv = 1;
+        rmradviceText = labels["rmrAdv1"].replace("$RMR", [restm*1.5]);
+      }
+      else if (record.bmi < 25) 
+      {
+        bmiType = 2;
+        rmrLv = 2;
+        rmradviceText = labels.rmrAdv2;
+      }
+      else if (record.bmi < 30) {
+        bmiType = 3;
+        rmrLv = 3;
+        rmradviceText = labels["rmrAdv3"].replace("$RMR", restm );
+      }
+      else if (record.bmi < 35) { bmiType = 4;
+        rmrLv = 3;
+        rmradviceText = labels["rmrAdv3"].replace("$RMR", restm );
+      }                
+      else {bmiType = 5;
+        rmrLv = 3;
+        rmradviceText = labels["rmrAdv3"].replace("$RMR", restm );
+      }
+
+      let bmiadviceText = labels["bmiAdv" + bmiType].replace("IdealWeight", `${idealWeight}`);
+
+      //BODY FAT
+      if (patient.gender.toLowerCase() == "male") {
+          bodyfatType = 2 + Math.floor((record.bodyfat - 14) / 3);
+      } else {
+          bodyfatType = 2 + Math.floor((record.bodyfat - 21) / 3);
+      }
+      if (bodyfatType < 1) bodyfatType = 1;
+      if (bodyfatType > 9) bodyfatType = 0;
+
+      //VISCERAL FAT
+      if (record.visfat > 9) {
+      visfatType = 2 + Math.floor((record.visfat - 9) / 2);
+      if (visfatType > 9) visfatType = 0
+      }
+
+      //BLOOD SUGAR
+      if (bloodsugarType == 0){
+        if(record.bloodsugar < 4.4){
+          bloodsugarLv = 1;
+        }else {
+          bloodsugarLv = Math.floor(2 + (record.bloodsugar-4.4)/0.6);
+          if(bloodsugarLv > 9) {
+            bloodsugarLv = 0;
+          }
+        }
+      } else if (bloodsugarType == 1){
+        if(record.bloodsugar < 6.7){
+          bloodsugarLv = 1;
+        }else {
+          bloodsugarLv = Math.floor(2 + (record.bloodsugar-6.7)/0.6);
+          if(bloodsugarLv > 9) {
+            bloodsugarLv = 0;
+          }
+        }
+      } else if (bloodsugarType == 2){
+        if(record.bloodsugar < 5.0){
+          bloodsugarLv = 1;
+        }else {
+          bloodsugarLv = Math.floor(2 + (record.bloodsugar-5.0)/0.6);
+          if(bloodsugarLv > 9) {
+            bloodsugarLv = 0;
+          }
+        }
+      } else{
+        if(record.bloodsugar < 4.4){
+          bloodsugarLv = 1;
+        }else {
+          bloodsugarLv = Math.floor(2 + (record.bloodsugar-4.4)/0.6);
+          if(bloodsugarLv > 9) {
+            bloodsugarLv = 0;
+          }
+        }
+      }
+
+      if(record.bloodpressure1 <= 65 || record.bloodpressure2 <= 95){
+        bloodpressureType = 1;
+      }else if (record.bloodpressure1 <= 80 || record.bloodpressure2 <= 120){
+        bloodpressureType = 2;
+      }else if (record.bloodpressure1 <= 90 || record.bloodpressure2 <= 140){
+        bloodpressureType = 3;
+      }else if (record.bloodpressure1 <= 100 || record.bloodpressure2 <= 160){
+        bloodpressureType = 4;
+      }else bloodpressureType = 5;
+
+      if (record.heartrate > 55)
+        heartrateType = 2;
+      if (record.heartrate > 90) 
+        heartrateType = 3;
+
+      let bodyageAdv = labels.bodyageAdv;
+      let bodyageType = 1; 
+      if(patient.age < record.bodyage) {
+        bodyageType = 3;
+        bodyageAdv = labels["bodyageAdv"].replace("$status", "higher than");}
+      else if (patient.age > record.bodyage) {
+        bodyageType = 1;
+        bodyageAdv = labels["bodyageAdv"].replace("$status", "younger than");}
+      else {
+        bodyageType = 2;
+        bodyageAdv = labels["bodyageAdv"].replace("$status", "same as");
+      }
+
+    if (!!record.weight){
+      prHtml += `<div class="row1">
+          <div class="column1">${labels.weight}</div> 
+          <div class="column2">${record.weight}kg</div> 
+        </div>`
+      }
+    if (!!record.height){
+          prHtml += `<div class="row1">
+              <div class="column1">${labels.height}</div> 
+              <div class="column2">${record.height}cm</div> 
+            </div>`
+          } 
+    if (!(!record.weight && !record.height)){
+          prHtml += `<div class="row1">
+              <div class="column1">${labels.bmi}
+                <img src="bmi-${patient.gender.toLowerCase().charAt(0)}${bmiType}.png" width="150"></div>
+                <div class="column2"><span>${record.bmi}</span>kg/m<sup>2</sup><br>
+                      <span>${bmiadviceText}</span></div> 
+            </div>`
+          }
+    if (!!record.bodyfat){
+      prHtml += `<div class="row1">
+          <div class="column1">${labels.bodyfat}<br>
+            <img src="meter-1${bodyfatType}.png" width="200"></div> 
+          <div class="column2">${record.bodyfat}%<br><span id="bodyfatAdv"></span></div> 
+        </div>`
+      }
+    if (!!record.visfat){
+      prHtml += `<div class="row1">
+          <div class="column1">${labels.visfat}<br>
+            <img src="reading-lv${visfatType}.png" width="200"></div>
+          <div class="column2">${record.visfat}<br><span id="visfatAdv"></span></div>
+        </div>`
+      }
+    if (!!record.bloodsugar){
+      prHtml += `<div class="row1">
+          <div class="column1">${labels.bloodsugar}<br>
+          <img src="meter-1${bloodsugarLv}.png" width="200"></div>
+          <div class="column2">${record.bloodsugar} mmol/L ()<br><span id="bloodsugarAdv"></span></div>
+        </div>`
+      }
+    if (!(!record.bloodpressure1 && !record.bloodpressure2)){
+      prHtml += `<div class="row1">
+          <div class="column1">${labels.bloodpressure}<br>
+          <img src="meter-5${bloodpressureType}.png" width="150"></div>
+          <div class="column2">${record.bloodpressure2}/${record.bloodpressure1} mmHg<br><span id="bloodpressureAdv"></span></div>
+        </div>`
+      }
+    if (!!record.heartrate){
+      prHtml += `<div class="row1">
+          <div class="column1">${labels.heartrate}<br>
+          <img src="meter-3${heartrateType}.png" width="150"></div>
+          <div class="column2">${record.heartrate}bpm<br><span id="heartrateAdv"></span></div>
+        </div>`
+      }
+    if (!!record.restm){
+      prHtml += `<div class="row1">
+          <div class="column1">${labels.restm}<br>
+            <img src="scale-4${rmrLv}.png" width="200"></div>
+          <div class="column2">${record.restm} kcal <br>${rmradviceText}</div>
+        </div>`
+      }
+    if (!!record.bodyage){
+      prHtml += `<div class="row1">
+        <div class="column1">${labels.bodyage}<br>
+        <img src="scale-5${bodyageType}.png" width="200"></div>
+        <div class="column2">${record.bodyage} yrs<br>${bodyageAdv}</div>
+        </div>`
+      }
+
+    return prHtml;
+  }
+
+  function getlbResult(inlabels){
+
+    const labels = inlabels;
+    let lbrHtml = '';
+    
+    const bViscosity = document.getElementById("bViscosity").value;
+    const bLipid = document.getElementById("bLipid").value;
+    const bCholesterols = document.getElementById("bCholesterols").value;
+    const bTRisk = document.getElementById("bTRisk").value;
+    const bParasite = document.getElementById("bParasite").value;
+    const mEnergy = document.getElementById("mEnergy").value;
+    const bMetabolism = document.getElementById("bMetabolism").value;
+    const anaemia = document.getElementById("anaemia").value;
+    const gToxins = document.getElementById("gToxins").value;
+    const malnutrition = document.getElementById("malnutrition").value;
+    const dDisorder = document.getElementById("dDisorder").value;
+    const iResistance = document.getElementById("iResistance").value;
+    const rSystem = document.getElementById("rSystem").value;
+    const rcIndex = document.getElementById("rcIndex").value;
+    const lsIndex = document.getElementById("lsIndex").value;
+    const nsIndex = document.getElementById("nsIndex").value;
+    const uAcid = document.getElementById("uAcid").value;
+
+    const metrics = {
+        bViscosity,bLipid,bCholesterols,bTRisk,bParasite,mEnergy,
+        bMetabolism,anaemia,gToxins,malnutrition,dDisorder,iResistance,
+        rSystem,rcIndex,lsIndex,nsIndex,uAcid
+      };
+
+      const bloodMetrics = [
+        { key: 'bViscosity', label: labels.bViscosity.label, text: labels.bViscosity.text },
+        { key: 'bLipid', label: labels.bLipid.label, text: labels.bLipid.text },
+        { key: 'bCholesterols', label: labels.bCholesterols.label, text: labels.bCholesterols.text},
+        { key: 'bTRisk', label: labels.bTRisk.label, text: labels.bTRisk.text },
+        { key: 'bParasite', label: labels.bParasite.label, text: labels.bParasite.text },
+        { key: 'mEnergy', label: labels.mEnergy.label, text: labels.mEnergy.text },
+        { key: 'bMetabolism', label: labels.bMetabolism.label, text: labels.bMetabolism.text },
+        { key: 'anaemia', label: labels.anaemia.label, text: labels.anaemia.text },
+        { key: 'gToxins', label: labels.gToxins.label, text: labels.gToxins.text },
+        { key: 'malnutrition', label: labels.malnutrition.label, text: labels.malnutrition.text },
+        { key: 'dDisorder', label: labels.dDisorder.label, text: labels.dDisorder.text },
+        { key: 'iResistance',label:labels.iResistance.label,text:labels.iResistance.text},
+        { key: 'rSystem', label: labels.rSystem.label, text: labels.rSystem.text },
+        { key: 'rcIndex', label: labels.rcIndex.label, text: labels.rcIndex.text },
+        { key: 'lsIndex', label: labels.lsIndex.label, text: labels.lsIndex.text },
+        { key: 'nsIndex', label: labels.nsIndex.label, text: labels.nsIndex.text },
+        { key: 'uAcid', label: labels.uAcid.label, text: labels.uAcid.text }
+      ];
+
+      bloodMetrics.forEach(metric => {
+        const value = metrics[metric.key];
+        if (value > 0) {
+          lbResult.push(metric.label + ": " + value);
+          lbrHtml += `
+            <div class="row1">
+            <div class="column1">${metric.label}<br>
+                <img src="meter-1${value}.png" width="200">
+              </div>
+              <div class="column2">${metric.text}</div>
+            </div>`;
+        }
+      });
+
+      record.addlbResult(lbResult);
+      lbResult = [];
+      return lbrHtml;
+  }
+
+  document.getElementById("generatepdf").onclick = function(){
+  const element = document.getElementById("pdfContent");
+
+  html2pdf().set({
+        margin: 10,
+        filename: `${patient.name}_Report.pdf`,
+        html2canvas: { scrollY: 0,useCORS: true },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+        pagebreak: { mode: ['css', 'legacy'] }
+      //pagebreak: { mode: ['avoid-all', 'css', 'legacy']}
+    }).from(element).save();
+}
+
+  document.getElementById("generatecsv").onclick = function(){
+   const fileName = "patient-record.csv";
+    const header = "Patient Name,Ic no, Contact No, Gender, Age, Record\n";
+    const newRow = `${patient.name},${patient.icno},${patient.contactno},${patient.gender},${patient.age},${JSON.stringify(record)}\n`;
+    patient.addRecord(record);
+
+
+    let csvData = localStorage.getItem("csvData");
+      if (!csvData) {
+        csvData = header + newRow;
+      } else {
+        csvData += newRow;
+      }
+
+      localStorage.setItem("csvData", csvData);
+      
+
+      const blob = new Blob(
+        [csvData], 
+        { type: "text/csv;charset=utf-8;" }
+      );
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = fileName;
+      link.click();
+      localStorage.removeItem("csvData");
+}
+  
+  </script>
+</body>
+</html>
